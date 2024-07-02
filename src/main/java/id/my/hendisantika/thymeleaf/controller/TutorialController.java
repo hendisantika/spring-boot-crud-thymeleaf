@@ -60,4 +60,15 @@ public class TutorialController {
 
         return "tutorials";
     }
+
+    @GetMapping("/tutorials/new")
+    public String addTutorial(Model model) {
+        Tutorial tutorial = new Tutorial();
+        tutorial.setPublished(true);
+
+        model.addAttribute("tutorial", tutorial);
+        model.addAttribute("pageTitle", "Create new Tutorial");
+
+        return "tutorial_form";
+    }
 }
