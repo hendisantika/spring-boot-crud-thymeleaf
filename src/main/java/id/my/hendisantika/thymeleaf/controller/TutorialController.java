@@ -10,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -85,5 +86,21 @@ public class TutorialController {
         }
 
         return "redirect:/tutorials";
+    }
+
+    @GetMapping("/tutorials/{id}")
+    public String editTutorial(@PathVariable("id") Integer id, Model model, RedirectAttributes redirectAttributes) {
+        try {
+            Tutorial tutorial = tutorialRepository.findById(id).get();
+
+            model.addAttribute("tutorial", tutorial);
+            model.addAttribute("pageTitle", "Edit Tutorial (ID: " + id + ")");
+
+            return "tutorial_form";
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("message", e.getMessage());
+
+            return "redirect:/tutorials";
+        }
     }
 }
