@@ -116,4 +116,21 @@ public class TutorialController {
 
         return "redirect:/tutorials";
     }
+
+    @GetMapping("/tutorials/{id}/published/{status}")
+    public String updateTutorialPublishedStatus(@PathVariable("id") Integer id, @PathVariable("status") boolean published,
+                                                Model model, RedirectAttributes redirectAttributes) {
+        try {
+            tutorialRepository.updatePublishedStatus(id, published);
+
+            String status = published ? "published" : "disabled";
+            String message = "The Tutorial id=" + id + " has been " + status;
+
+            redirectAttributes.addFlashAttribute("message", message);
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("message", e.getMessage());
+        }
+
+        return "redirect:/tutorials";
+    }
 }
