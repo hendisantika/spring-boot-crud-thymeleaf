@@ -10,7 +10,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,5 +72,18 @@ public class TutorialController {
         model.addAttribute("pageTitle", "Create new Tutorial");
 
         return "tutorial_form";
+    }
+
+    @PostMapping("/tutorials/save")
+    public String saveTutorial(Tutorial tutorial, RedirectAttributes redirectAttributes) {
+        try {
+            tutorialRepository.save(tutorial);
+
+            redirectAttributes.addFlashAttribute("message", "The Tutorial has been saved successfully!");
+        } catch (Exception e) {
+            redirectAttributes.addAttribute("message", e.getMessage());
+        }
+
+        return "redirect:/tutorials";
     }
 }
