@@ -48,7 +48,7 @@
                     <select class="size-select" form="searchForm" id="pageSize" name="size"
                             onchange="changePageSize()"
                             th:value="${pageSize}">
-                        <option th:each="s : ${ {3, 6, 9} }" th:selected="${s == pageSize}" th:text="${s}"
+                        <option th:each="s : ${ {5, 10, 25} }" th:selected="${s == pageSize}" th:text="${s}"
                                 th:value="${s}"></option>
                     </select>
                 </div>
