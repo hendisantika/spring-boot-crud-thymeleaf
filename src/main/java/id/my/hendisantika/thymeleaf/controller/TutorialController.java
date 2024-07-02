@@ -35,7 +35,7 @@ public class TutorialController {
 
     private final TutorialRepository tutorialRepository;
 
-    @GetMapping("/tutorials")
+    @GetMapping({"/tutorials", "/"})
     public String getAll(Model model, @RequestParam(required = false) String keyword,
                          @RequestParam(defaultValue = "1") int page, @RequestParam(defaultValue = "3") int size) {
         try {
