@@ -14,6 +14,9 @@ on:
   pull_request:
     branches: [ "main" ]
 
+env:
+  IMAGE_TAG: ${{ github.run_number }}
+
 jobs:
   docker-build:
     runs-on: ubuntu-latest
@@ -70,6 +73,28 @@ jobs:
         run: |
           touch key.txt && echo "${{ secrets.SERVER_KEY }}" > key.txt
           chmod 600 key.txt
+
+      - name: Set all environment variables
+        env:
+          SERVER_HOST: ${{ vars.SERVER_HOST }}
+          SERVER_PORT: ${{ vars.SERVER_PORT }}
+          SERVER_USERNAME: ${{ vars.SERVER_USERNAME }}
+          IMAGE_TAG: ${{ github.run_number }}
+          CONTAINER_NAME: thymeleaf
+        run: |
+          echo CONTAINER_NAME=$CONTAINER_NAME >> .env
+          echo IMAGE_TAG=$IMAGE_TAG >> .env
+
+      - name: Copy all environment variables
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ vars.SERVER_HOST }}
+          username: ${{ vars.SERVER_USERNAME }}
+          key: ${{ secrets.SERVER_KEY }}
+          port: ${{ vars.SERVER_PORT }}
+          source: "./.env"  # Path to the file on your runner
+          target: "~/thymeleaf"  # Target directory on the server
+
       - name: Deploy the application
         env:
           SERVER_HOST: ${{ vars.SERVER_HOST }}
