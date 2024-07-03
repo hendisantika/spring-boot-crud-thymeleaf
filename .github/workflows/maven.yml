@@ -72,7 +72,7 @@ jobs:
       - name: Add Server key
         run: |
           touch key.txt && echo "${{ secrets.SERVER_KEY }}" > key.txt
-          chmod 600 key.txt
+          chmod 700 key.txt
 
       - name: Set all environment variables
         env:
