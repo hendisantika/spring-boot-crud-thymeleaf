@@ -1,4 +1,5 @@
 FROM maven:3.9.8-eclipse-temurin-21-alpine AS build
+FROM --platform=linux/arm64 my-base-image:latest
 LABEL authors="hendisantika"
 
 RUN mkdir /project
@@ -23,6 +24,7 @@ RUN mvn clean package
 #FROM bellsoft/liberica-openjdk-debian:21
 #FROM openjdk:21-slim
 FROM amazoncorretto:21-alpine-jdk
+FROM --platform=linux/arm64 my-base-image:latest
 LABEL maintainer="hendisantika@yahoo.co.id"
 
 RUN mkdir /app
