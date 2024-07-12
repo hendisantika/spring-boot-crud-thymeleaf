@@ -16,7 +16,7 @@ if [ "$(docker ps -qa -f name=$CONTAINER_NAME)" ]; then
     fi
 fi
 
-docker run -d --rm -p $APP_SERVER_PORT:$APP_SERVER_PORT --env-file .env --name $CONTAINER_NAME  linux/arm64/v8 hendisantika/thymeleaf:$IMAGE_TAG
+docker run -d --rm -p $APP_SERVER_PORT:$APP_SERVER_PORT --env-file .env --name $CONTAINER_NAME hendisantika/thymeleaf:$IMAGE_TAG
 exit
 ENDSSH
 
