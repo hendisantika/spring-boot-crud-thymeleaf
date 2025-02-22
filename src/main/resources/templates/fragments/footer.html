@@ -1,4 +1,4 @@
 <footer class="text-center">
     <!--    Copyright &copy; th:text="${#dates.year(#dates.createNow())}" HendiSantika-->
-    Copyright &copy; HendiSantika
+    Copyright &copy; HendiSantika <p th:text="${#temporals.format(localDate, 'MMM yyyy')}"></p>
 </footer>

@@ -42,4 +42,11 @@ public class Tutorial {
 
     @Column
     private boolean published;
+
+    public Tutorial(String title, String description, int level, boolean published) {
+        this.title = title;
+        this.description = description;
+        this.level = level;
+        this.published = published;
+    }
 }

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +58,7 @@ public class TutorialController {
             model.addAttribute("totalItems", pageTuts.getTotalElements());
             model.addAttribute("totalPages", pageTuts.getTotalPages());
             model.addAttribute("pageSize", size);
+            model.addAttribute("localDate", LocalDate.now());
         } catch (Exception e) {
             model.addAttribute("message", e.getMessage());
         }
